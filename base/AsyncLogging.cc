@@ -82,7 +82,6 @@ void AsyncLogging::threadFunc()
 
 #endif
 
-
             _buffers.push_back(std::move(_current_buffer));
             _buffers.swap(buffers_to_write);
             _current_buffer = std::move(new_buffer1);
@@ -169,9 +168,6 @@ int main()
 
 
 #endif
-
-
-
 
 
 

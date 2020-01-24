@@ -24,7 +24,10 @@ public:
     ~Logger();
 
     LogStream& stream() {  return  _impl._stream; }
-    static LogLevel getlogLevel();
+    static LogLevel getlogLevel()
+    {
+        return g_logLevel;
+    }
     static void setlogLevel(LogLevel);
 
 
@@ -43,14 +46,10 @@ private:
     };
 
     Impl _impl;
+    static LogLevel g_logLevel;
 
 };
 
-extern Logger::LogLevel g_logLevel;
-Logger::LogLevel Logger::getlogLevel()
-{
-    return g_logLevel;
-}
 
 
 #define LOG_TRACE if (Logger::getlogLevel() <= Logger::TRACE) \

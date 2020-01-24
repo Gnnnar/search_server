@@ -13,6 +13,7 @@ using namespace std;
 
 static pthread_once_t once_control_ = PTHREAD_ONCE_INIT;
 static AsyncLogging *AsyncLogger_ = nullptr;
+Logger::LogLevel  Logger::g_logLevel = Logger::TRACE;
 
 void once_init()//应该在单例的配置文件类获取参数
 {
@@ -25,8 +26,6 @@ void output(const char* msg, int len)
     pthread_once(&once_control_, once_init);
     AsyncLogger_->append(msg, len);
 }
-
-Logger::LogLevel  g_logLevel = Logger::TRACE;
 
 __thread char t_errnobuf[512];
 __thread char t_time[64];

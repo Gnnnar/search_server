@@ -5,7 +5,7 @@
 #include "../base/Logging.h"
 
 Poller::Poller(EventLoop* loop)
-: _ownerLoop(loop)
+    : _ownerLoop(loop)
 {}
 
 Poller::~Poller()
@@ -69,12 +69,40 @@ void Poller::updateChannel(Channel* channel)
         int idx = channel->index();
         assert(0 <= idx && idx < static_cast<int>(_pollfds.size()));
         struct pollfd& pfd = _pollfds[idx];
-        assert(pfd.fd == channel->fd() || pfd.fd == -1);
+        assert(pfd.fd == channel->fd() || pfd.fd == -channel->fd()-1);
         pfd.events = static_cast<short>(channel->events());
         pfd.revents = 0;
         if(channel->isNoneEvent())
         {
-            pfd.fd = -1;
+            pfd.fd = -channel->fd()-1;
         }
     }
 }
+
+void Poller::removeChannel(Channel* channel)
+{
+    assertInLoopThread();
+    LOG_TRACE << "fd = " << channel->fd();
+    assert(_channels.find(channel->fd()) != _channels.end());
+    assert(_channels[channel->fd()] == channel);
+    assert(channel->isNoneEvent());
+    int idx = channel->index();
+    assert(0 <= idx && idx < static_cast<int>(_pollfds.size()));
+    const struct pollfd& pfd = _pollfds[idx]; (void)pfd;
+    assert(pfd.fd == -channel->fd()-1 && pfd.events == channel->events());
+    size_t n = _channels.erase(channel->fd());
+    assert(n == 1); (void)n;
+    if (size_t(idx) == _pollfds.size()-1) {
+        _pollfds.pop_back();
+    } else {
+        int channelAtEnd = _pollfds.back().fd;
+        iter_swap(_pollfds.begin()+idx, _pollfds.end()-1);
+        if (channelAtEnd < 0) {
+            channelAtEnd = -channelAtEnd-1;
+        }
+        _channels[channelAtEnd]->set_index(idx);
+        _pollfds.pop_back();
+    }
+}
+
+

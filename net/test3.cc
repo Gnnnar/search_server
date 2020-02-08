@@ -5,29 +5,50 @@
 using namespace std;
 #include <stdio.h>
 
+#include "Acceptor.h"
+#include "EventLoop.h"
+#include "InetAddress.h"
+#include "SocketsOps.h"
+#include <stdio.h>
+#include "TcpServer.h"
 
-void runInThread()
+
+void onConnection(const TcpConnectionPtr& conn)
 {
-    printf("runInThread(): pid = %d, tid = %d\n",
-           getpid(), CurrentThread::tid());
+    if (conn->connected())
+    {
+        printf("onConnection(): new connection [%s] from %s\n",
+               conn->name().c_str(),
+               conn->peerAddress().toHostPort().c_str());
+    }
+    else
+    {
+        printf("onConnection(): connection [%s] is down\n",
+               conn->name().c_str());
+    }
+
+}
+
+void onMessage(const TcpConnectionPtr& conn,
+               const char* data,
+               ssize_t len)
+{
+    printf("onMessage(): received %zd bytes from connection [%s]\n",
+           len, conn->name().c_str());
 }
 
 int main()
 {
-    printf("main(): pid = %d, tid = %d\n",
-           getpid(), CurrentThread::tid());
+    printf("main(): pid = %d\n", getpid());
 
-    EventLoopThread loopThread;
-    EventLoop* loop = loopThread.startLoop();
-    loop->runInLoop(runInThread);
-    sleep(1);
-    loop->runAfter(2, runInThread);
-    sleep(3);
-    loop->quit();
+    InetAddress listenAddr(9981);
+    EventLoop loop;
 
-    printf("exit main().\n");
+    TcpServer server(&loop, listenAddr);
+    server.setConnectionCallback(onConnection);
+    server.setMessageCallback(onMessage);
+    server.start();
+
+    loop.loop();
 
 }
-
-
-

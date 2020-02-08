@@ -36,6 +36,8 @@ public:
 
     void updateChannel(Channel* channel);
 
+    void removeChannel(Channel* channel);
+
     void assertInLoopThread()
     {
         if(_thead_id != CurrentThread::tid())

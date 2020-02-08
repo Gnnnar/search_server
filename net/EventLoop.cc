@@ -139,6 +139,14 @@ void EventLoop::updateChannel(Channel* channel)
     _poller->updateChannel(channel);
 }
 
+void EventLoop::removeChannel(Channel* channel)
+{
+    assert(channel->ownerLoop() == this);
+    assertInLoopThread();
+    _poller->removeChannel(channel);
+}
+
+
 void EventLoop::abortNotInLoopThread()
 {
     LOG_FATAL << "EventLoop::abortNotInLoopThread - EventLoop " << (EventLoop*)this

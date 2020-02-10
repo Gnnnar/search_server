@@ -1,17 +1,7 @@
-#include "EventLoop.h"
-#include "EventLoopThread.h"
-#include <sys/types.h>
-#include <unistd.h>
-using namespace std;
-#include <stdio.h>
-
-#include "Acceptor.h"
+#include "TcpServer.h"
 #include "EventLoop.h"
 #include "InetAddress.h"
-#include "SocketsOps.h"
 #include <stdio.h>
-#include "TcpServer.h"
-
 
 void onConnection(const TcpConnectionPtr& conn)
 {
@@ -20,26 +10,33 @@ void onConnection(const TcpConnectionPtr& conn)
         printf("onConnection(): new connection [%s] from %s\n",
                conn->name().c_str(),
                conn->peerAddress().toHostPort().c_str());
+
     }
     else
     {
         printf("onConnection(): connection [%s] is down\n",
                conn->name().c_str());
+
     }
 
 }
 
 void onMessage(const TcpConnectionPtr& conn,
-               const char* data,
-               ssize_t len)
+               Buffer* buf,
+               Timestamp receiveTime)
 {
-    printf("onMessage(): received %zd bytes from connection [%s]\n",
-           len, conn->name().c_str());
-}
+    printf("onMessage(): received %zd bytes from connection [%s] at %s\n",
+           buf->readableBytes(),
+           conn->name().c_str(),
+           receiveTime.toFormattedString().c_str());
 
+    conn->send(buf->retrieveAllAsString());
+
+}
+/*
 int main()
 {
-    printf("main(): pid = %d\n", getpid());
+ //   printf("main(): pid = %\n", getpid());
 
     InetAddress listenAddr(9981);
     EventLoop loop;
@@ -51,4 +48,4 @@ int main()
 
     loop.loop();
 
-}
+}*/

@@ -1,6 +1,7 @@
 #pragma once
 #include "Callbacks.h"
 #include "InetAddress.h"
+#include "Buffer.h"
 #include "../base/noncopyable.h"
 
 class Channel;
@@ -25,6 +26,10 @@ public:
     const InetAddress& localAddress() { return _localAddr;  }
     const InetAddress& peerAddress() { return _peerAddr;  }
     bool connected() const { return _state == kConnected;  }
+    
+    void send(const std::string& message);
+
+    void shutdown();
 
     void setConnectionCallback(const ConnectionCallback& cb)
     { _connectionCallback = cb;  }
@@ -40,12 +45,16 @@ public:
     void connectDestroyed();
 
 private:
-    enum StateE { kConnecting, kConnected,kDisconnected };
+    enum StateE { kConnecting, kConnected, kDisconnecting, kDisconnected };
     void setState(StateE s) { _state = s;  };
-    void handleRead();
+    void handleRead(Timestamp receiveTime);
     void handleWrite();
     void handleClose();
     void handleError();
+    
+    void sendInLoop(const std::string& message);
+    void shutdownInLoop();
+
     EventLoop *_loop;
     std::string _name;
     StateE _state;
@@ -56,5 +65,7 @@ private:
     ConnectionCallback _connectionCallback;
     MessageCallback _messageCallback;
     CloseCallback _closeCallback;
+    Buffer _inputBuffer;
+    Buffer _outputBuffer;
 };
 

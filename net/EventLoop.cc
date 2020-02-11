@@ -7,7 +7,7 @@
 #include <sys/eventfd.h>
 #include "../base/Logging.h"
 #include "EventLoop.h"
-#include "Poller.h"
+#include "EPoller.h"
 #include "Channel.h"
 
 __thread EventLoop* t_loopInThisThread = 0;
@@ -29,7 +29,7 @@ EventLoop::EventLoop()
     , _quit(false)
     , _callingPendingFunctors(false)
     , _thead_id(CurrentThread::tid())
-    , _poller(new Poller(this))
+    , _poller(new EPoller(this))
     , _timerQueue(new TimerQueue(this))
     , _wakeupFd(createEventfd())
       , _wakeupChannel(new Channel(this,_wakeupFd))

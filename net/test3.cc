@@ -38,7 +38,7 @@ void onMessage(const TcpConnectionPtr& conn,
            receiveTime.toFormattedString().c_str());
     buf->retrieveAll();
 }
-/*
+
 int main(int argc, char* argv[])
 {
     printf("main(): pid = %d\n", getpid());
@@ -68,4 +68,4 @@ int main(int argc, char* argv[])
     }
     server.start();
     loop.loop();
-}*/
+}

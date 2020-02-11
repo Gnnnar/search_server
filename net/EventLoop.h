@@ -8,7 +8,7 @@
 
 
 class Channel;
-class Poller;
+class EPoller;
 
 class EventLoop : noncopyable
 {
@@ -56,7 +56,7 @@ private:
     bool _callingPendingFunctors;
     Timestamp _pollReturnTime;
     pid_t _thead_id;
-    std::unique_ptr<Poller> _poller;
+    std::unique_ptr<EPoller> _poller;
     std::unique_ptr<TimerQueue> _timerQueue;
     int _wakeupFd;
     std::unique_ptr<Channel> _wakeupChannel;

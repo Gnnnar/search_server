@@ -52,6 +52,24 @@ void TcpConnection::shutdown()
     _loop->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
 }
 
+void TcpConnection::forceClose()
+{
+    if (_state == kConnected || _state == kDisconnecting)
+    {
+        setState(kDisconnecting);
+        _loop->queueInLoop(std::bind(&TcpConnection::forceCloseInLoop, shared_from_this()));
+    }
+}
+
+void TcpConnection::forceCloseInLoop()
+{
+    _loop->assertInLoopThread();
+    if (_state == kConnected || _state == kDisconnecting)
+    {
+        handleClose();
+    }
+}
+
 void TcpConnection::sendInLoop(const std::string& message)
 {
     _loop->assertInLoopThread();
@@ -105,10 +123,12 @@ void TcpConnection::connectEstablished()
 void TcpConnection::connectDestroyed()
 {
     _loop->assertInLoopThread();
-    assert(_state == kConnected || _state == kDisconnecting);
-    setState(kDisconnected);
-    _channel->disableAll();
-    _connectionCallback(shared_from_this());
+    if(_state == kConnected)
+    {
+        setState(kDisconnected);
+        _channel->disableAll();
+        _connectionCallback(shared_from_this());
+    }
     _loop->removeChannel(_channel.get());
 }
 
@@ -163,7 +183,9 @@ void TcpConnection::handleClose()
     _loop->assertInLoopThread();
     LOG_TRACE << "TcpConnection::handleClose state = " << _state;
     assert(_state == kConnected || _state == kDisconnecting);
+    setState(kDisconnected);
     _channel->disableAll();
+    _connectionCallback(shared_from_this());
     _closeCallback(shared_from_this());
 }
 

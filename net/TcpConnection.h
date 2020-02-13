@@ -3,6 +3,7 @@
 #include "InetAddress.h"
 #include "Buffer.h"
 #include "../base/noncopyable.h"
+#include "Wheel.h"
 
 class Channel;
 class EventLoop;
@@ -26,17 +27,25 @@ public:
     const InetAddress& localAddress() { return _localAddr;  }
     const InetAddress& peerAddress() { return _peerAddr;  }
     bool connected() const { return _state == kConnected;  }
-    
+
     void send(const std::string& message);
 
     void shutdown();
+
+    void forceClose();
+
+    void setContext(WeakEntryPtr& context)
+    { _context = context;  }
+
+    const WeakEntryPtr& getContext() const
+    { return _context;  }
 
     void setConnectionCallback(const ConnectionCallback& cb)
     { _connectionCallback = cb;  }
 
     void setMessageCallback(const MessageCallback& cb)
     { _messageCallback = cb;  }
-    
+
     void setCloseCallback(const CloseCallback& cb)
     { _closeCallback = cb;  }
 
@@ -51,9 +60,10 @@ private:
     void handleWrite();
     void handleClose();
     void handleError();
-    
+
     void sendInLoop(const std::string& message);
     void shutdownInLoop();
+    void forceCloseInLoop();
 
     EventLoop *_loop;
     std::string _name;
@@ -67,5 +77,6 @@ private:
     CloseCallback _closeCallback;
     Buffer _inputBuffer;
     Buffer _outputBuffer;
+    WeakEntryPtr _context;
 };
 

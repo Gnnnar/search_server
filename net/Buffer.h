@@ -84,6 +84,12 @@ public:
         assert(end <= beginWrite());
         retrieve(end - peek());
     }
+    
+    std::string func(const char* end)
+    {
+        size_t len = end - peek() + 1;
+        return retrieveAsString(len);
+    }
 
     void retrieveInt64()
     {

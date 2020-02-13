@@ -5,7 +5,7 @@
 #include "Mutex.h"
 #include "Condition.h"
 #include "CountDownLatch.h"
-
+#include "CurrentThread.h"
 
 class Thread : noncopyable
 {

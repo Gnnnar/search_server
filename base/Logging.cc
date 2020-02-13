@@ -17,7 +17,7 @@ Logger::LogLevel  Logger::g_logLevel = Logger::TRACE;
 
 void once_init()//应该在单例的配置文件类获取参数
 {
-    AsyncLogger_ = new AsyncLogging("SeServer",64*1024*1024);
+    AsyncLogger_ = new AsyncLogging("../log/SeServer",64*1024*1024);
     AsyncLogger_->start(); 
 }
 

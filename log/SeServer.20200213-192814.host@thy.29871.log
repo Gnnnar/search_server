@@ -1,0 +1,113 @@
+20200213 19:28:14.674139 main:29871 TRACE updateChannel fd = 4 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:14.678098 main:29871 TRACE EventLoop EventLoop created 1 in thread 29871 - ../net/EventLoop.cc:37
+20200213 19:28:14.678123 main:29871 TRACE updateChannel fd = 5 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:16.912733 Thread:29878 TRACE updateChannel fd = 9 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:16.912764 Thread:29878 TRACE EventLoop EventLoop created 1 in thread 29878 - ../net/EventLoop.cc:37
+20200213 19:28:16.912768 Thread:29878 TRACE updateChannel fd = 10 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:16.912925 Thread:29879 TRACE updateChannel fd = 12 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:16.912951 Thread:29879 TRACE EventLoop EventLoop created 1 in thread 29879 - ../net/EventLoop.cc:37
+20200213 19:28:16.912955 Thread:29879 TRACE updateChannel fd = 13 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:16.912983 main:29871 TRACE updateChannel fd = 7 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:26.921850 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:26.921862 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:26.922554 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:28.637086 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.637161 main:29871 INFO  TcpServer::newConnection [0.0.0.0:8888] - new connection [0.0.0.0:8888#1] from 127.0.0.1:59132 - ../net/TcpServer.cc:54
+20200213 19:28:28.637184 main:29871 DEBUG TcpConnection TcpConnection::ctor[0.0.0.0:8888#1] at  fd=14 - ../net/TcpConnection.cc:23
+20200213 19:28:28.637252 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.637291 Thread:29878 TRACE updateChannel fd = 14 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:28.637334 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.639020 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.639153 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.639174 Thread:29878 TRACE handleClose TcpConnection::handleClose state = 1 - ../net/TcpConnection.cc:184
+20200213 19:28:28.639188 Thread:29878 TRACE updateChannel fd = 14 events = 0 - ../net/EPoller.cc:77
+20200213 19:28:28.639223 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.639228 main:29871 INFO  TcpServer::removeConnection [0.0.0.0:8888] - connection 0.0.0.0:8888#1 - ../net/TcpServer.cc:75
+20200213 19:28:28.639239 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:28.639243 Thread:29878 TRACE removeChannel fd = 14 - ../net/EPoller.cc:121
+20200213 19:28:28.639258 main:29871 DEBUG ~TcpConnection TcpConnection::dtor[0.0.0.0:8888#1] at  fd=14 - ../net/TcpConnection.cc:32
+20200213 19:28:36.268990 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269041 main:29871 INFO  TcpServer::newConnection [0.0.0.0:8888] - new connection [0.0.0.0:8888#2] from 127.0.0.1:59136 - ../net/TcpServer.cc:54
+20200213 19:28:36.269062 main:29871 DEBUG TcpConnection TcpConnection::ctor[0.0.0.0:8888#2] at  fd=14 - ../net/TcpConnection.cc:23
+20200213 19:28:36.269108 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269147 Thread:29879 TRACE updateChannel fd = 14 events = 3 - ../net/EPoller.cc:77
+20200213 19:28:36.269193 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269349 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269409 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269421 Thread:29879 TRACE handleClose TcpConnection::handleClose state = 1 - ../net/TcpConnection.cc:184
+20200213 19:28:36.269428 Thread:29879 TRACE updateChannel fd = 14 events = 0 - ../net/EPoller.cc:77
+20200213 19:28:36.269849 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269863 main:29871 INFO  TcpServer::removeConnection [0.0.0.0:8888] - connection 0.0.0.0:8888#2 - ../net/TcpServer.cc:75
+20200213 19:28:36.269896 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:28:36.269910 Thread:29879 TRACE removeChannel fd = 14 - ../net/EPoller.cc:121
+20200213 19:28:36.269917 Thread:29879 DEBUG ~TcpConnection TcpConnection::dtor[0.0.0.0:8888#2] at  fd=14 - ../net/TcpConnection.cc:32
+20200213 19:28:38.647857 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:46.279198 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:46.279950 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:48.653532 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:56.284207 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:56.287101 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:28:58.661290 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:06.291780 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:06.294244 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:08.670205 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:16.300986 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:16.301004 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:16.435275 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.435334 main:29871 INFO  TcpServer::newConnection [0.0.0.0:8888] - new connection [0.0.0.0:8888#3] from 127.0.0.1:59144 - ../net/TcpServer.cc:54
+20200213 19:29:16.435352 main:29871 DEBUG TcpConnection TcpConnection::ctor[0.0.0.0:8888#3] at  fd=14 - ../net/TcpConnection.cc:23
+20200213 19:29:16.435423 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.435460 Thread:29878 TRACE updateChannel fd = 14 events = 3 - ../net/EPoller.cc:77
+20200213 19:29:16.435498 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.436631 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.436763 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.436773 Thread:29878 TRACE handleClose TcpConnection::handleClose state = 1 - ../net/TcpConnection.cc:184
+20200213 19:29:16.436777 Thread:29878 TRACE updateChannel fd = 14 events = 0 - ../net/EPoller.cc:77
+20200213 19:29:16.436805 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.436811 main:29871 INFO  TcpServer::removeConnection [0.0.0.0:8888] - connection 0.0.0.0:8888#3 - ../net/TcpServer.cc:75
+20200213 19:29:16.436821 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.436824 Thread:29878 TRACE removeChannel fd = 14 - ../net/EPoller.cc:121
+20200213 19:29:16.436831 main:29871 DEBUG ~TcpConnection TcpConnection::dtor[0.0.0.0:8888#3] at  fd=14 - ../net/TcpConnection.cc:32
+20200213 19:29:16.999673 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.999729 main:29871 INFO  TcpServer::newConnection [0.0.0.0:8888] - new connection [0.0.0.0:8888#4] from 127.0.0.1:59146 - ../net/TcpServer.cc:54
+20200213 19:29:16.999747 main:29871 DEBUG TcpConnection TcpConnection::ctor[0.0.0.0:8888#4] at  fd=14 - ../net/TcpConnection.cc:23
+20200213 19:29:16.999812 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:16.999845 Thread:29879 TRACE updateChannel fd = 14 events = 3 - ../net/EPoller.cc:77
+20200213 19:29:16.999884 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:17.    81 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:17.   233 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:17.   257 Thread:29879 TRACE handleClose TcpConnection::handleClose state = 1 - ../net/TcpConnection.cc:184
+20200213 19:29:17.   262 Thread:29879 TRACE updateChannel fd = 14 events = 0 - ../net/EPoller.cc:77
+20200213 19:29:17.   330 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:17.   340 main:29871 INFO  TcpServer::removeConnection [0.0.0.0:8888] - connection 0.0.0.0:8888#4 - ../net/TcpServer.cc:75
+20200213 19:29:17.   356 Thread:29879 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:17.   362 Thread:29879 TRACE removeChannel fd = 14 - ../net/EPoller.cc:121
+20200213 19:29:17.   368 Thread:29879 DEBUG ~TcpConnection TcpConnection::dtor[0.0.0.0:8888#4] at  fd=14 - ../net/TcpConnection.cc:32
+20200213 19:29:26.445856 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:27. 10303 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:27. 10320 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:31.912541 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912592 main:29871 INFO  TcpServer::newConnection [0.0.0.0:8888] - new connection [0.0.0.0:8888#5] from 127.0.0.1:59152 - ../net/TcpServer.cc:54
+20200213 19:29:31.912615 main:29871 DEBUG TcpConnection TcpConnection::ctor[0.0.0.0:8888#5] at  fd=14 - ../net/TcpConnection.cc:23
+20200213 19:29:31.912675 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912699 Thread:29878 TRACE updateChannel fd = 14 events = 3 - ../net/EPoller.cc:77
+20200213 19:29:31.912739 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912833 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912946 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912955 Thread:29878 TRACE handleClose TcpConnection::handleClose state = 1 - ../net/TcpConnection.cc:184
+20200213 19:29:31.912959 Thread:29878 TRACE updateChannel fd = 14 events = 0 - ../net/EPoller.cc:77
+20200213 19:29:31.912982 main:29871 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912987 main:29871 INFO  TcpServer::removeConnection [0.0.0.0:8888] - connection 0.0.0.0:8888#5 - ../net/TcpServer.cc:75
+20200213 19:29:31.912996 Thread:29878 TRACE poll 1 events happended - ../net/EPoller.cc:40
+20200213 19:29:31.912999 Thread:29878 TRACE removeChannel fd = 14 - ../net/EPoller.cc:121
+20200213 19:29:31.913006 main:29871 DEBUG ~TcpConnection TcpConnection::dtor[0.0.0.0:8888#5] at  fd=14 - ../net/TcpConnection.cc:32
+20200213 19:29:37. 19320 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:41.922783 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:41.922783 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:47. 27608 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:51.931537 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:51.931895 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:29:57. 37443 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:30:01.941524 Thread:29878 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:30:01.941946 main:29871 TRACE poll  nothing happended - ../net/EPoller.cc:48
+20200213 19:30:07. 47388 Thread:29879 TRACE poll  nothing happended - ../net/EPoller.cc:48

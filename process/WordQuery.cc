@@ -39,6 +39,7 @@ WordQuery::WordQuery()
     : _conf(Configuration::getInstance()->getConfigMap())
 {
     loadLibrary();
+    _cache.start();
 }
 
 void WordQuery::loadLibrary()
@@ -107,15 +108,13 @@ string WordQuery::doQuery(const string & str)
 {
     if(str.size() == 0)
         return returnNoAnswer();
-    string ret;
-/*    string ret = predis->get(str);
+    string ret = _cache.read(str);
     if(ret != "-1")
     {
         cout << ">> 缓存命中" << endl;
         return ret;
     }
     cout << ">> 缓存未命中,将进行计算" <<endl;
-*/
     map<string,int> frq = _jieba(str);
     vector<string> words;
     vector<pair<int,vector<double>>> resultList;
@@ -128,7 +127,7 @@ string WordQuery::doQuery(const string & str)
         if(_invertIndexTable.find(s.first) == _invertIndexTable.end())
         {
             ret =  returnNoAnswer();
-//            predis->set(str,ret);
+            _cache.write(CacheNode(str,ret));
             return ret;
         }
         words.push_back(s.first);
@@ -138,7 +137,7 @@ string WordQuery::doQuery(const string & str)
     if(docs.size() == 0)
     {
         ret =  returnNoAnswer();
-//        predis->set(str,ret);
+        _cache.write(CacheNode(str,ret));
         return ret;
     }
     for(auto docId : docs)
@@ -157,7 +156,7 @@ string WordQuery::doQuery(const string & str)
     for(auto & s: resultList)
         docs.push_back(s.first);
     ret = createJson(docs,words);
-//    predis->set(str,ret);
+    _cache.write(CacheNode(str,ret));
     return ret;
 #if 0
     for(auto s:docs)

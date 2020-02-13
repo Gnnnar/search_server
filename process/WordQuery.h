@@ -1,5 +1,6 @@
 #ifndef __WORDQUERY_H__
 #define __WORDQUERY_H__
+#include "MyCache.h"
 #include "OnWebPage.h"
 #include "Configuration.h"
 #include <unordered_map>
@@ -20,6 +21,7 @@ private:
 
 private:
     WordSegmentation _jieba;
+    MyCache _cache;
     map<string,string>& _conf;
     vector<OnWebPage> _pageLib;
     unordered_map<string, map<int, double> > _invertIndexTable;

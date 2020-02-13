@@ -5,6 +5,7 @@
 #include "../base/ThreadPool.h"
 #include "WordQuery.h"
 #include <iostream>
+
 using std::placeholders::_1;
 using std::placeholders::_2;
 using std::placeholders::_3;
